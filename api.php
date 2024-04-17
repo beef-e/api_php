@@ -16,7 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             echo json_encode(get_attori(null));
         }
-    } else {
-        http_response_code(404);
+    } elseif ($_SERVER['PATH_INFO'] == '/genres') {
+        if (isset($_GET['genere'])) {
+            echo json_encode(get_generi($_GET['genere']));
+        } else {
+            echo json_encode(get_generi(null));
+        }
+    } elseif ($_SERVER['PATH_INFO'] == '/directors') {
+        if (isset($_GET['regista'])) {
+            echo json_encode(get_registi($_GET['regista']));
+        } else {
+            echo json_encode(get_registi(null));
+        }
     }
+} else {
+    http_response_code(404);
 }
