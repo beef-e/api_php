@@ -6,46 +6,51 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0" />
 		<title>API</title>
+		<link
+			rel="stylesheet"
+			href="static/css/main.css" />
 	</head>
 	<body>
-		<form
-			action="api.php/movies"
-			method="get">
-			<input
-				type="text"
-				name="titolo" />
-			<label for="titolo">Titolo</label>
-			<input type="submit" />
-		</form>
+		<div class="searchbars">
+			<form
+				action="api.php/movies"
+				method="get">
+				<label for="titolo">Titolo</label>
+				<input
+					type="text"
+					name="titolo" />
+				<input type="submit" />
+			</form>
 
-		<form
-			action="api.php/actors"
-			method="get">
-			<input
-				type="text"
-				name="attore" />
-			<label for="submit">Attori</label>
-			<input type="submit" />
-		</form>
+			<form
+				action="api.php/actors"
+				method="get">
+				<label for="submit">Attori</label>
+				<input
+					type="text"
+					name="attore" />
+				<input type="submit" />
+			</form>
 
-		<form
-			action="api.php/genres"
-			method="get">
-			<input
-				type="text"
-				name="genere" />
-			<label for="genere">Genere</label>
-			<input type="submit" />
-		</form>
+			<form
+				action="api.php/genres"
+				method="get">
+				<label for="genere">Genere</label>
+				<input
+					type="text"
+					name="genere" />
+				<input type="submit" />
+			</form>
 
-		<form
-			action="api.php/directors"
-			method="get">
-			<input
-				type="text"
-				name="regista" />
-			<label for="regista">Regista</label>
-			<input type="submit" />
-		</form>
+			<form
+				action="api.php/directors"
+				method="get">
+				<label for="regista">Regista</label>
+				<input
+					type="text"
+					name="regista" />
+				<input type="submit" />
+			</form>
+		</div>
 	</body>
 </html>
