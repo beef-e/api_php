@@ -36,15 +36,34 @@ function get_film($user_input)
   // per ogni film, prendo gli attori
   foreach ($films as $index => $movie) {
     $films[$index]["Actors"]=[];
+    $films[$index]["Directors"]=[];
     $sql = "SELECT Attore.id, Attore.nome, Attore.cognome, Attore.data_di_nascita from Film_Attore JOIN Attore ON film_id = '" . $movie["id"] . "' AND attore_id = id";
     //$sql = "SELECT * FROM Film_Attore WHERE film_id = '$movie["id"]'";
     $result = mysqli_query($conn, $sql);
     $coppia = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $sql = "SELECT Regista.* from Regista JOIN Film_Regista ON film_id = '" . $movie["id"] . "' AND regista_id = Regista.id";
+    $result = mysqli_query($conn, $sql);
+    $directors = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $sql = "SELECT nome FROM Genere JOIN Film_Genere ON film_id = '" . $movie["id"] . "' AND genere_id = nome";
+    $result = mysqli_query($conn, $sql);
+    $genres = mysqli_fetch_all($result, MYSQLI_ASSOC);
+ 
     // per ogni riga prendo l'id dell'attore
     foreach ($coppia as $key) {
       $films[$index]["Actors"] = $coppia;
       // array_push($films[$index]["Actors"], $coppia);
     }
+
+    foreach ($directors as $key) {
+      $films[$index]["Directors"] = $directors;
+    }
+
+    foreach ($genres as $key) {
+      $films[$index]["Genres"] = $genres;
+    }
+
     // per ogni id attore, prendo effettivamente l'attore
     /*foreach ($actors_id as $actor_value) {
       $sql = "SELECT * FROM Attore WHERE id='$actor_value'";
