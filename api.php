@@ -36,6 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo json_encode(get_users(null));
         }
     }
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['PATH_INFO'] == '/users') {
+        $nome = $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        $email = $_POST['email'];
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        $result = create_user($nome, $cognome, $email, $hashedPassword);
+    }
 } else {
     http_response_code(404);
 }

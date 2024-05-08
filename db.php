@@ -104,6 +104,19 @@ function get_users($user_input)
   return $rows;
 }
 
+function create_user($nome, $cognome, $email, $password)
+{
+  global $conn;
+  $sql = "SELECT * FROM Utenti WHERE email='$email'";
+  $result = mysqli_query($conn, $sql);
+  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  if (count($rows) > 0) {
+    return "Utente già esistente";
+  }
+  $sql = "INSERT INTO Utenti (nome, last_name, email, hashedPSW, reg_date) VALUES ('$nome', '$cognome', '$email', '$password', NOW())";
+  $result = mysqli_query($conn, $sql);
+  return $result;
+}
 
 function get_attori_by_film($film)
 {
