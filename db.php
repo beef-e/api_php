@@ -4,9 +4,6 @@ $conn = mysqli_connect("localhost", "api", "", "api_movies");
 function get_film($user_input)
 {
   global $conn;
-  $film_id = [];
-  $actors_id = [];
-  $data = [];
   $sql = "";
   if ($user_input == null) {
     $sql = "SELECT * FROM Film";
@@ -17,26 +14,10 @@ function get_film($user_input)
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   $films = $rows;
 
-  // return $rows;
-
-  /*foreach ($rows as $film) {
-    array_push($data, $film["id"]);
-  }*/
-
- /* foreach ($films as $movie) {
-    $movie["Attori"] = "ciao";
-    //echo $movie["Attori"];
-
-    foreach ($movie as $key => $value) {
-      echo "movie: ";
-      echo $key . " " . $value . "<br>";
-    }
-}*/
-
   // per ogni film, prendo gli attori
   foreach ($films as $index => $movie) {
-    $films[$index]["Actors"]=[];
-    $films[$index]["Directors"]=[];
+    $films[$index]["Actors"] = [];
+    $films[$index]["Directors"] = [];
     $sql = "SELECT Attore.id, Attore.nome, Attore.cognome, Attore.data_di_nascita from Film_Attore JOIN Attore ON film_id = '" . $movie["id"] . "' AND attore_id = id";
     //$sql = "SELECT * FROM Film_Attore WHERE film_id = '$movie["id"]'";
     $result = mysqli_query($conn, $sql);
@@ -49,7 +30,7 @@ function get_film($user_input)
     $sql = "SELECT nome FROM Genere JOIN Film_Genere ON film_id = '" . $movie["id"] . "' AND genere_id = nome";
     $result = mysqli_query($conn, $sql);
     $genres = mysqli_fetch_all($result, MYSQLI_ASSOC);
- 
+
     // per ogni riga prendo l'id dell'attore
     foreach ($coppia as $key) {
       $films[$index]["Actors"] = $coppia;
@@ -63,28 +44,6 @@ function get_film($user_input)
     foreach ($genres as $key) {
       $films[$index]["Genres"] = $genres;
     }
-
-    // per ogni id attore, prendo effettivamente l'attore
-    /*foreach ($actors_id as $actor_value) {
-      $sql = "SELECT * FROM Attore WHERE id='$actor_value'";
-      $result = mysqli_query($conn, $sql);
-      $attore = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      $actor = $attore[0];
-
-      // per ogni film, controllo che l'id sia uguale a quello del film in questione e aggiungo l'attore
-      foreach ($films as $movie) {
-        if ($movie["id"] === $film_value) {
-          $movie["Attori"] = $actor;
-        }
-      }
-    }
-  }*/
-
-  /*foreach ($actors_id as $value) {
-    foreach ($attore as $actor) {
-      array_push($movie["Attori"], $actor);
-    }
-  }*/
   }
   return $films;
 }
@@ -125,6 +84,20 @@ function get_registi($user_input)
     $sql = "SELECT * FROM Regista";
   } else {
     $sql = "SELECT * FROM Regista WHERE nome like '%$user_input%' OR cognome like '%$user_input%' OR secondo_nome like '%$user_input%'";
+  }
+  $result = mysqli_query($conn, $sql);
+  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  return $rows;
+}
+
+function get_users($user_input)
+{
+  global $conn;
+  $sql = "";
+  if ($user_input == null) {
+    $sql = "SELECT * FROM Utenti";
+  } else {
+    $sql = "SELECT * FROM Utenti WHERE nome like '%$user_input%' OR cognome like '%$user_input%' OR email like '%$user_input%' OR id = '$user_input'";
   }
   $result = mysqli_query($conn, $sql);
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
