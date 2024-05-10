@@ -221,6 +221,32 @@ INSERT INTO `Film_Regista` VALUES
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Film_Utente`
+--
+
+DROP TABLE IF EXISTS `Film_Utente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Film_Utente` (
+  `id_film` int(11) DEFAULT NULL,
+  `id_utente` int(11) DEFAULT NULL,
+  KEY `id_film` (`id_film`),
+  KEY `id_utente` (`id_utente`),
+  CONSTRAINT `Film_Utente_ibfk_1` FOREIGN KEY (`id_film`) REFERENCES `Film` (`id`),
+  CONSTRAINT `Film_Utente_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `Utenti` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Film_Utente`
+--
+
+LOCK TABLES `Film_Utente` WRITE;
+/*!40000 ALTER TABLE `Film_Utente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Film_Utente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Genere`
 --
 
@@ -288,6 +314,35 @@ INSERT INTO `Regista` VALUES
 (7,'Robert','Lee','Zemeckis','1952-05-14');
 /*!40000 ALTER TABLE `Regista` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `Utenti`
+--
+
+DROP TABLE IF EXISTS `Utenti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Utenti` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `hashedPSW` varchar(255) NOT NULL,
+  `reg_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Utenti`
+--
+
+LOCK TABLES `Utenti` WRITE;
+/*!40000 ALTER TABLE `Utenti` DISABLE KEYS */;
+INSERT INTO `Utenti` VALUES
+(2,'prova','prova','prova@prova.it','$2y$10$KyyIDkq5Y02ueiigHTZqUuicTy3pR1QLRy.YGjs1fYYQbFbpV0lG6','2024-05-08 17:58:41');
+/*!40000 ALTER TABLE `Utenti` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -298,4 +353,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-05 20:56:23
+-- Dump completed on 2024-05-10 19:03:55
