@@ -118,6 +118,15 @@ function create_user($nome, $cognome, $email, $password)
   return $result;
 }
 
+function get_film_users($user_id)
+{
+  global $conn;
+  $sql = "SELECT * FROM Film_Utente WHERE id_utente = '$user_id'";
+  $result = mysqli_query($conn, $sql);
+  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  return $rows;
+}
+
 function get_attori_by_film($film)
 {
   $film = json_decode($film, true);

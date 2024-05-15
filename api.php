@@ -1,5 +1,6 @@
 <?php
 include_once 'db.php';
+include_once 'utils.php';
 
 //creiamo entrypoint
 
@@ -35,6 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             echo json_encode(get_users(null));
         }
+    } elseif ($_SERVER['PATH_INFO'] == '/recommendations') {
+        //$user_id = $_GET['user_id'];
+        $result = build_matrix();
+        print "<pre>";
+        print_r($result);
+        print "</pre>";
+        //echo "<code>" . print_r($result) . "</code>";
+        //echo json_encode($result);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_SERVER['PATH_INFO'] == '/users') {
