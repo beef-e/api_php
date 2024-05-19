@@ -243,6 +243,18 @@ CREATE TABLE `Film_Utente` (
 
 LOCK TABLES `Film_Utente` WRITE;
 /*!40000 ALTER TABLE `Film_Utente` DISABLE KEYS */;
+INSERT INTO `Film_Utente` VALUES
+(5,2),
+(7,5),
+(1,3),
+(3,3),
+(4,2),
+(7,2),
+(5,4),
+(7,4),
+(1,4),
+(3,4),
+(4,4);
 /*!40000 ALTER TABLE `Film_Utente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +342,7 @@ CREATE TABLE `Utenti` (
   `hashedPSW` varchar(255) NOT NULL,
   `reg_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +352,11 @@ CREATE TABLE `Utenti` (
 LOCK TABLES `Utenti` WRITE;
 /*!40000 ALTER TABLE `Utenti` DISABLE KEYS */;
 INSERT INTO `Utenti` VALUES
-(2,'prova','prova','prova@prova.it','$2y$10$KyyIDkq5Y02ueiigHTZqUuicTy3pR1QLRy.YGjs1fYYQbFbpV0lG6','2024-05-08 17:58:41');
+(1,'donotuse','donotuse','ciao@gmail.com','prova','2024-05-16 09:46:33'),
+(2,'prova','prova','prova@prova.it','$2y$10$KyyIDkq5Y02ueiigHTZqUuicTy3pR1QLRy.YGjs1fYYQbFbpV0lG6','2024-05-08 17:58:41'),
+(3,'George','Clooney','asd123@email.com','$2y$10$N/BS.BhRB.puGbAT9OCmceTrSiVSgWYaISQJVcFDzH7IHdVLKRpwu','2024-05-15 11:18:37'),
+(4,'Mastro','Geppetto','gesualdo@gmail.com','$2y$10$9JXvvG4wXQptoy6uVKhBQOT3ducec4zuorB09E/MBx2DYMEr6jkL.','2024-05-15 11:19:10'),
+(5,'Roger','Rabbit','roger@rabbit.com','$2y$10$YcGJCH1EgGhF1q52CKAfqumLnF.MQ2jGTOj01OZjs95ihQO2rATs6','2024-05-15 11:19:37');
 /*!40000 ALTER TABLE `Utenti` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -353,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-10 19:03:55
+-- Dump completed on 2024-05-19 19:56:50
