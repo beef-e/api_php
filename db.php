@@ -127,6 +127,16 @@ function get_film_users($user_id)
   return $rows;
 }
 
+function get_film_by_id($movie_id)
+{
+
+  global $conn;
+  $sql = "SELECT * FROM Film WHERE id='$movie_id'";
+  $result = mysqli_query($conn, $sql);
+  $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  return $rows;
+}
+
 function get_attori_by_film($film)
 {
   $film = json_decode($film, true);

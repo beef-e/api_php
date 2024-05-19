@@ -37,13 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo json_encode(get_users(null));
         }
     } elseif ($_SERVER['PATH_INFO'] == '/recommendations') {
-        //$user_id = $_GET['user_id'];
-        $result = build_matrix();
-        print "<pre>";
-        print_r($result);
-        print "</pre>";
-        //echo "<code>" . print_r($result) . "</code>";
-        //echo json_encode($result);
+        $user_id = $_GET['user_id'];
+        $recommendations = get_recommendations($user_id);
+        echo json_encode(get_film_by_id($recommendations));
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_SERVER['PATH_INFO'] == '/users') {

@@ -1,6 +1,45 @@
 <?php
 include_once 'db.php';
 
+function get_recommendations($user_id)
+{
+    $matrix = build_matrix();
+    $user_array = $matrix[$user_id];
+    $max_cosine = 0;
+    $id_similar_user = 0;
+
+    for ($i = 1; $i <= count($matrix); $i++) {
+        if (!is_null($matrix[$user_id]) && $i != $user_id) {
+            $cosine = cosine_similarity($user_array, $matrix[$i]);
+            if ($cosine != 1 && $max_cosine < $cosine) {
+                $max_cosine = $cosine;
+                $id_similar_user = $i;
+            }
+        }
+    }
+
+    // TODO prendo id_similar_user, prendo i film che ha visto, prendi quelli del mio utente e confronto le due tabelle per individuare il primo che ut_2 ha visto e ut_1 no
+
+    $films_user_remote = get_film_users($id_similar_user);
+    $films_user_examined = get_film_users($user_id);
+    $films_user_examined_ids = array();
+
+    foreach ($films_user_examined as $film) {
+        array_push($films_user_examined_ids, $film["id_film"]);
+    }
+
+    echo "filmsid array: ";
+    echo "<pre>";
+    print_r($films_user_examined_ids);
+    echo "</pre>";
+
+    foreach ($films_user_remote as $instance) {
+        if (!in_array($instance["id_film"], $films_user_examined_ids)) {
+            return $instance["id_film"];
+        }
+    }
+}
+
 function cosine_similarity($user_vector1, $user_vector2)
 {
 
