@@ -28,11 +28,6 @@ function get_recommendations($user_id)
         array_push($films_user_examined_ids, $film["id_film"]);
     }
 
-    echo "filmsid array: ";
-    echo "<pre>";
-    print_r($films_user_examined_ids);
-    echo "</pre>";
-
     foreach ($films_user_remote as $instance) {
         if (!in_array($instance["id_film"], $films_user_examined_ids)) {
             return $instance["id_film"];
